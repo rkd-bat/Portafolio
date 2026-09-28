@@ -1,0 +1,48 @@
+---
+import { ui, type Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<header
+  class="sticky top-0 z-50 border-b border-white/10 bg-zinc-950/80 backdrop-blur-md"
+>
+  <div
+    class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4"
+  >
+    <a
+      href="#inicio"
+      class="text-lg font-bold tracking-wide text-zinc-100"
+      aria-label="Ir al inicio"
+    >
+      LB<span class="text-amber-400">.</span>
+    </a>
+
+    <nav aria-label="Navegación principal">
+      <ul
+        class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-zinc-300"
+      >
+        <li>
+          <a href="#proyectos" class="transition-colors hover:text-amber-400">
+            {t.projects}
+          </a>
+        </li>
+        <li>
+          <a href="#sobre-mi" class="transition-colors hover:text-amber-400">
+            {t.about}
+          </a>
+        </li>
+        <li>
+          <a href="#contacto" class="transition-colors hover:text-amber-400">
+            {t.contact}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

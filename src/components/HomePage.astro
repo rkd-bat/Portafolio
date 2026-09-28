@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { ui, type Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<BaseLayout
+  lang={lang}
+  title="Liam Barrientos | Full Stack Developer & UI/UX Designer"
+  description={t.heroDescription}
+>
+  <main id="inicio">
+    <section
+      class="mx-auto flex min-h-[85vh] max-w-6xl flex-col justify-center px-6 py-24"
+    >
+      <p class="text-sm uppercase tracking-[0.2em] text-amber-400">
+        {t.heroRole}
+      </p>
+      <h1
+        class="mt-6 max-w-4xl text-5xl font-semibold tracking-tight md:text-7xl"
+      >
+        {t.heroTitle}
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-zinc-400">{t.heroDescription}</p>
+      <a
+        class="mt-10 w-fit rounded-full border border-amber-400 px-6 py-3 text-amber-300"
+        href="#proyectos"
+      >
+        {t.viewProjects}
+      </a>
+    </section>
+
+    <section id="proyectos" class="mx-auto max-w-6xl px-6 py-24">
+      <h2 class="text-3xl font-semibold">{t.featuredProjects}</h2>
+    </section>
+
+    <section id="sobre-mi" class="mx-auto max-w-6xl px-6 py-24">
+      <h2 class="text-3xl font-semibold">{t.about}</h2>
+    </section>
+
+    <section id="contacto" class="mx-auto max-w-6xl px-6 py-24">
+      <h2 class="text-3xl font-semibold">{t.contact}</h2>
+    </section>
+  </main>
+</BaseLayout>
