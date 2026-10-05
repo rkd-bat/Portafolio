@@ -1,4 +1,5 @@
 ---
+import LanguageSwitcher from "./LanguageSwitcher.astro";
 import { ui, type Lang } from "../i18n/ui";
 
 interface Props {
@@ -18,12 +19,12 @@ const t = ui[lang];
     <a
       href="#inicio"
       class="text-lg font-bold tracking-wide text-zinc-100"
-      aria-label="Ir al inicio"
+      aria-label={t.goHome}
     >
       LB<span class="text-amber-400">.</span>
     </a>
 
-    <nav aria-label="Navegación principal">
+    <nav aria-label={t.mainNavigation}>
       <ul
         class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-zinc-300"
       >
@@ -41,6 +42,9 @@ const t = ui[lang];
           <a href="#contacto" class="transition-colors hover:text-amber-400">
             {t.contact}
           </a>
+        </li>
+        <li>
+          <LanguageSwitcher lang={lang} />
         </li>
       </ul>
     </nav>

@@ -1,5 +1,10 @@
 export const ui = {
     es: {
+        goHome: "Ir al inicio",
+        mainNavigation: "Navegación principal",
+        languageSelector: "Seleccionar idioma",
+        spanishLanguage: "Español",
+        englishLanguage: "Inglés",
         projects: "Proyectos",
         about: "Sobre mí",
         contact: "Contacto",
@@ -10,6 +15,11 @@ export const ui = {
         featuredProjects: "Proyectos destacados",
     },
     en: {
+        goHome: "Go to home",
+        mainNavigation: "Main navigation",
+        languageSelector: "Select language",
+        spanishLanguage: "Spanish",
+        englishLanguage: "English",
         projects: "Projects",
         about: "About",
         contact: "Contact",
