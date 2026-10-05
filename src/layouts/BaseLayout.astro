@@ -22,7 +22,7 @@ const { title, description, lang = "es" } = Astro.props;
   </head>
 
   <body class="min-h-screen bg-zinc-950 text-zinc-100 antialiased">
-    <Header />
+    <Header lang={lang} />
     <slot />
   </body>
 </html>
