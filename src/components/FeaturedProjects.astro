@@ -1,6 +1,5 @@
 ---
-import ProjectCard from "./ProjectCard.astro";
-import { projects } from "../data/projects";
+import ProjectGallery from "./ProjectGallery.astro";
 import { ui, type Lang } from "../i18n/ui";
 
 interface Props {
@@ -19,14 +18,10 @@ const t = ui[lang];
   <div class="mb-10 border-t border-white/10 pt-8">
     <p class="text-xs font-medium uppercase tracking-[0.2em] text-amber-400">{t.selectedWork}</p>
     <h2 id="featured-projects-title" class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
-      {t.featuredProjects}
+      {t.projects}
     </h2>
     <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-400">{t.projectsIntroduction}</p>
   </div>
 
-  <div class="grid gap-6 md:grid-cols-2">
-    {projects.map((project, index) => (
-      <ProjectCard project={project} lang={lang} number={index + 1} />
-    ))}
-  </div>
+  <ProjectGallery lang={lang} />
 </section>

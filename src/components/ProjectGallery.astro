@@ -1,0 +1,104 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+import { projects } from "../data/projects";
+import { ui, type Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const filters = [
+  { value: "all", label: t.allProjects },
+  { value: "professional", label: t.professionalProjects },
+  { value: "personal", label: t.personalProjects },
+];
+const groups = [
+  { id: "featured", title: t.featuredProjects, projects: projects.filter((project) => project.featured), compact: false },
+  { id: "more", title: t.moreProjects, projects: projects.filter((project) => !project.featured), compact: true },
+];
+---
+
+<project-gallery class="block">
+  <div data-project-controls hidden>
+    <div role="group" aria-label={t.projectFilters} class="mb-3 flex flex-wrap gap-2">
+      {filters.map((filter) => (
+        <button
+          type="button"
+          data-project-filter={filter.value}
+          aria-pressed={filter.value === "all" ? "true" : "false"}
+          aria-controls="project-gallery-results"
+          class="min-h-11 rounded-full border border-white/10 px-4 py-2 text-sm text-zinc-400 transition-colors hover:border-amber-400/40 hover:text-zinc-100 aria-pressed:border-amber-400/40 aria-pressed:bg-amber-400/10 aria-pressed:text-amber-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400 motion-reduce:transition-none"
+        >
+          {filter.label}
+        </button>
+      ))}
+    </div>
+    <p data-project-count data-count-template={t.projectsCount} role="status" aria-atomic="true" class="mb-8 text-xs text-zinc-500">
+      {t.projectsCount.replace("{count}", String(projects.length))}
+    </p>
+  </div>
+
+  <div id="project-gallery-results" class="space-y-12">
+    {groups.map((group) => (
+      <div data-project-group>
+        <h3 id={`projects-${group.id}-title`} class="mb-5 text-lg font-semibold text-zinc-200">
+          {group.title}
+        </h3>
+        <ul
+          aria-labelledby={`projects-${group.id}-title`}
+          class:list={["grid gap-6 md:grid-cols-2", !group.compact && "lg:grid-cols-3"]}
+        >
+          {group.projects.map((project) => (
+            <li data-project-category={project.category}>
+              <ProjectCard project={project} lang={lang} number={projects.indexOf(project) + 1} compact={group.compact} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</project-gallery>
+
+<script>
+  class ProjectGallery extends HTMLElement {
+    connectedCallback() {
+      const controls = this.querySelector<HTMLElement>("[data-project-controls]");
+      const buttons = this.querySelectorAll<HTMLButtonElement>("[data-project-filter]");
+      const items = this.querySelectorAll<HTMLElement>("[data-project-category]");
+      const groups = this.querySelectorAll<HTMLElement>("[data-project-group]");
+      const count = this.querySelector<HTMLElement>("[data-project-count]");
+
+      buttons.forEach((button) => {
+        button.onclick = () => {
+          const filter = button.dataset.projectFilter;
+          let visibleCount = 0;
+
+          items.forEach((item) => {
+            item.hidden = filter !== "all" && item.dataset.projectCategory !== filter;
+            if (!item.hidden) visibleCount += 1;
+          });
+
+          groups.forEach((group) => {
+            group.hidden = !Array.from(group.querySelectorAll<HTMLElement>("[data-project-category]")).some((item) => !item.hidden);
+          });
+
+          buttons.forEach((filterButton) => {
+            filterButton.setAttribute("aria-pressed", String(filterButton === button));
+          });
+
+          if (count) {
+            count.textContent = (count.dataset.countTemplate ?? "{count}").replace("{count}", String(visibleCount));
+          }
+        };
+      });
+
+      if (controls) controls.hidden = false;
+    }
+  }
+
+  if (!customElements.get("project-gallery")) {
+    customElements.define("project-gallery", ProjectGallery);
+  }
+</script>
