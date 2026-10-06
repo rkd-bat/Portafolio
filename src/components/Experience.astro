@@ -1,0 +1,89 @@
+---
+import { experience } from "../data/experience";
+import { ui, type Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<section
+  id="experiencia"
+  aria-labelledby="experience-title"
+  class="mx-auto max-w-6xl scroll-mt-28 px-6 py-24"
+>
+  <div class="mb-10 border-t border-white/10 pt-8">
+    <p class="text-xs font-medium uppercase tracking-[0.2em] text-amber-400">
+      {t.experienceEyebrow}
+    </p>
+    <h2 id="experience-title" class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+      {t.experienceTitle}
+    </h2>
+  </div>
+
+  <ol class="space-y-8">
+    {experience.map((entry, index) => (
+      <li class="grid grid-cols-[1.5rem_minmax(0,1fr)] gap-x-4 md:grid-cols-[9rem_2rem_minmax(0,1fr)] md:gap-x-6">
+        <p class="col-start-2 mb-3 font-mono text-xs leading-relaxed text-zinc-400 md:col-start-1 md:row-start-1 md:mb-0 md:pt-8 md:text-right">
+          <span class="sr-only">{t.experiencePeriod}: </span>
+          {entry.period[lang]}
+        </p>
+
+        <div class="relative col-start-1 row-span-2 row-start-1 md:col-start-2 md:row-span-1" aria-hidden="true">
+          {index < experience.length - 1 && (
+            <span class="absolute -bottom-12 left-1/2 top-4 w-px bg-white/10 md:-bottom-16 md:top-8" />
+          )}
+          <span
+            class:list={[
+              "absolute left-1/2 top-4 size-2.5 -translate-x-1/2 rounded-full border md:top-8",
+              entry.current
+                ? "border-amber-300 bg-amber-400 shadow-[0_0_16px_rgba(251,191,36,0.3)]"
+                : "border-zinc-500 bg-zinc-950",
+            ]}
+          />
+        </div>
+
+        <article
+          aria-labelledby={`experience-${entry.id}`}
+          class:list={[
+            "col-start-2 rounded-2xl border bg-white/[0.025] p-6 backdrop-blur-sm md:col-start-3 md:row-start-1 sm:p-8",
+            entry.current ? "border-amber-400/20" : "border-white/10",
+          ]}
+        >
+          <div class="flex flex-wrap items-start justify-between gap-3">
+            <h3 id={`experience-${entry.id}`} class="text-lg font-semibold tracking-tight text-zinc-100 sm:text-xl">
+              {entry.role[lang]}
+            </h3>
+            {entry.current && (
+              <span class="rounded-full border border-amber-400/25 bg-amber-400/10 px-3 py-1 text-xs font-medium text-amber-300">
+                {t.experienceCurrent}
+              </span>
+            )}
+          </div>
+          <p class="mt-2 text-sm text-zinc-500">{entry.organization[lang]}</p>
+          <p class="mt-3 text-xs font-medium text-zinc-400">
+            <span class="sr-only">{t.experienceWorkMode}: </span>
+            {entry.workMode[lang]}
+          </p>
+
+          <ul class="mt-6 space-y-3 pl-4 text-sm leading-relaxed text-zinc-400 marker:text-amber-400/60">
+            {entry.contributions[lang].map((contribution) => (
+              <li class="list-disc">{contribution}</li>
+            ))}
+          </ul>
+
+          <ul aria-label={t.projectTechnologies} class="mt-6 flex flex-wrap gap-2 border-t border-white/10 pt-5">
+            {entry.tags.map((tag) => (
+              <li class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
+                {tag}
+              </li>
+            ))}
+          </ul>
+        </article>
+      </li>
+    ))}
+  </ol>
+</section>
