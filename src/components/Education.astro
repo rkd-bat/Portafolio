@@ -1,0 +1,55 @@
+---
+import { ui, type Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const institution = "Universidad Tecnológica General Mariano Escobedo";
+const startYear = 2019;
+const endYear = 2024;
+---
+
+<section
+  id="educacion"
+  aria-labelledby="education-title"
+  class="mx-auto max-w-6xl scroll-mt-28 px-6 py-24"
+>
+  <div class="mb-8 border-t border-white/10 pt-8">
+    <p class="text-xs font-medium uppercase tracking-[0.2em] text-amber-400">
+      {t.educationEyebrow}
+    </p>
+    <h2 id="education-title" class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+      {t.education}
+    </h2>
+  </div>
+
+  <article
+    aria-labelledby="degree-title"
+    class="rounded-2xl border border-white/10 bg-white/[0.025] p-6 sm:p-8"
+  >
+    <div class="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+      <div class="max-w-2xl">
+        <h3 id="degree-title" class="text-xl font-semibold tracking-tight text-zinc-100 sm:text-2xl">
+          {t.educationDegree}
+        </h3>
+        <p class="mt-3 text-base leading-relaxed text-zinc-400">{institution}</p>
+      </div>
+
+      <div class="flex shrink-0 flex-wrap items-center gap-3 md:flex-col md:items-end">
+        <p class="font-mono text-sm text-zinc-400">
+          <span class="sr-only">{t.educationPeriod}: </span>
+          <time datetime={String(startYear)}>{startYear}</time>
+          <span aria-hidden="true">–</span>
+          <span class="sr-only"> {t.educationTo} </span>
+          <time datetime={String(endYear)}>{endYear}</time>
+        </p>
+        <span class="rounded-full border border-amber-400/25 bg-amber-400/10 px-3 py-1 text-xs font-medium text-amber-300">
+          {t.educationStatus}
+        </span>
+      </div>
+    </div>
+  </article>
+</section>
