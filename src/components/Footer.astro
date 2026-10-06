@@ -1,0 +1,26 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { site } from "../config/site";
+import { ui, type Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const year = new Date().getUTCFullYear();
+---
+
+<footer class="border-t border-white/10">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-6">
+    <p class="text-sm text-zinc-500">© {year} {site.name}</p>
+    <a
+      href={`${getRelativeLocaleUrl(lang, "")}#inicio`}
+      class="inline-flex min-h-11 items-center gap-2 text-sm text-zinc-400 transition-colors hover:text-amber-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400"
+    >
+      {t.backToTop}
+      <span aria-hidden="true">↑</span>
+    </a>
+  </div>
+</footer>

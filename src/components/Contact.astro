@@ -1,0 +1,86 @@
+---
+import { site } from "../config/site";
+import SocialIcon from "./SocialIcon.astro";
+import MailIcon from "./MailIcon.astro";
+import { ui, type Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const profiles = [
+  { label: "LinkedIn", url: site.linkedin, icon: "linkedin" },
+  { label: "GitHub", url: site.github, icon: "github" },
+] as const;
+---
+
+<section
+  id="contacto"
+  aria-labelledby="contact-title"
+  class="mx-auto max-w-6xl scroll-mt-28 px-6 py-24"
+>
+  <div class="border-t border-white/10 pt-8">
+    <p class="text-xs font-medium uppercase tracking-[0.2em] text-amber-400">{t.contact}</p>
+    <div class="mt-4 grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
+      <div>
+        <h2 id="contact-title" class="text-4xl font-semibold tracking-tight md:text-5xl">
+          {t.contactTitle}
+        </h2>
+        <p class="mt-5 max-w-xl text-base leading-relaxed text-zinc-400">
+          {t.contactDescription}
+        </p>
+        <a
+          href={`mailto:${site.email}`}
+          class="mt-8 inline-flex min-h-11 items-center gap-3 rounded-full border border-amber-400/50 px-6 py-3 text-sm font-medium text-amber-300 transition-colors hover:border-amber-400 hover:bg-amber-400/10 motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400"
+        >
+          <MailIcon />
+          {t.sendEmail}
+        </a>
+      </div>
+
+      <div class="rounded-2xl border border-white/10 bg-white/[0.025] p-6 sm:p-8">
+        <dl class="space-y-6">
+          <div>
+            <dt class="text-xs font-medium uppercase tracking-widest text-zinc-500">{t.emailLabel}</dt>
+            <dd class="mt-2">
+              <a
+                href={`mailto:${site.email}`}
+                class="inline-flex min-h-11 items-center gap-2 text-sm text-zinc-200 transition-colors hover:text-amber-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400"
+              >
+                <MailIcon />
+                <span class="min-w-0 [overflow-wrap:anywhere]">{site.email}</span>
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class="text-xs font-medium uppercase tracking-widest text-zinc-500">{t.locationLabel}</dt>
+            <dd class="mt-2 text-sm text-zinc-200">{t.contactLocation}</dd>
+          </div>
+          <div>
+            <dt class="text-xs font-medium uppercase tracking-widest text-zinc-500">{t.collaborationLabel}</dt>
+            <dd class="mt-2 text-sm leading-relaxed text-zinc-400">{t.remotePreference}</dd>
+          </div>
+        </dl>
+
+        <ul aria-label={t.professionalProfiles} class="mt-7 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/10 pt-4">
+          {profiles.map((profile) => (
+            <li>
+              <a
+                href={profile.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-zinc-200 transition-colors hover:text-amber-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400"
+              >
+                <SocialIcon name={profile.icon} />
+                {profile.label}
+                <span class="sr-only"> ({t.opensNewTab})</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
