@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import FeaturedProjects from "./FeaturedProjects.astro";
 import { ui, type Lang } from "../i18n/ui";
 
 interface Props {
@@ -36,9 +37,7 @@ const t = ui[lang];
       </a>
     </section>
 
-    <section id="proyectos" class="mx-auto max-w-6xl px-6 py-24">
-      <h2 class="text-3xl font-semibold">{t.featuredProjects}</h2>
-    </section>
+    <FeaturedProjects lang={lang} />
 
     <section id="sobre-mi" class="mx-auto max-w-6xl px-6 py-24">
       <h2 class="text-3xl font-semibold">{t.about}</h2>

@@ -13,6 +13,13 @@ export const ui = {
         heroDescription: "Combino investigación, diseño de interfaces y desarrollo de software para crear soluciones útiles.",
         viewProjects: "Explorar proyectos",
         featuredProjects: "Proyectos destacados",
+        selectedWork: "Trabajo seleccionado",
+        projectsIntroduction: "Dos sistemas empresariales en los que participé desde la definición de requerimientos hasta el diseño y el desarrollo Full Stack.",
+        workProject: "Proyecto profesional",
+        projectRole: "Mi rol",
+        projectTechnologies: "Tecnologías y herramientas",
+        projectContribution: "Mi participación",
+        conceptPreview: "Vista conceptual",
     },
     en: {
         goHome: "Go to home",
@@ -28,6 +35,13 @@ export const ui = {
         heroDescription: "I combine research, interface design, and software development to create useful solutions.",
         viewProjects: "Explore projects",
         featuredProjects: "Featured projects",
+        selectedWork: "Selected work",
+        projectsIntroduction: "Two business systems I worked on from requirements definition through design and full-stack development.",
+        workProject: "Professional project",
+        projectRole: "My role",
+        projectTechnologies: "Technologies and tools",
+        projectContribution: "My contribution",
+        conceptPreview: "Concept preview",
     },
 } as const;
 
