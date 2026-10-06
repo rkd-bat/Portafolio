@@ -1,0 +1,81 @@
+---
+import type { Project } from "../data/projects";
+import { ui, type Lang } from "../i18n/ui";
+
+interface Props {
+  project: Project;
+  lang: Lang;
+  number: number;
+}
+
+const { project, lang, number } = Astro.props;
+const t = ui[lang];
+const titleId = `project-${project.id}`;
+---
+
+<article
+  aria-labelledby={titleId}
+  class="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025] transition-colors hover:border-amber-400/30 motion-reduce:transition-none"
+>
+  <div class="relative aspect-[16/9] overflow-hidden border-b border-white/10 bg-zinc-900/60">
+    {project.preview ? (
+      <img
+        src={project.preview.src}
+        alt={project.preview.alt[lang]}
+        width="960"
+        height="540"
+        loading="lazy"
+        decoding="async"
+        class="h-full w-full object-cover"
+      />
+    ) : (
+      <div class="absolute inset-0 flex items-center justify-center overflow-hidden" aria-hidden="true">
+        <div class="absolute size-64 rounded-full border border-white/5" />
+        <div class="absolute size-44 rounded-full border border-amber-400/10" />
+        <div class="absolute h-px w-full bg-white/5" />
+        <div class="absolute h-full w-px bg-white/5" />
+        <span class="relative text-6xl font-semibold tracking-[0.15em] text-zinc-500 transition-colors group-hover:text-amber-300/70 motion-reduce:transition-none">
+          {project.code}
+        </span>
+      </div>
+    )}
+    <span class="absolute left-5 top-5 font-mono text-xs tracking-widest text-zinc-500" aria-hidden="true">
+      {String(number).padStart(2, "0")}
+    </span>
+    {!project.preview && (
+      <span class="absolute bottom-5 right-5 text-xs text-zinc-500">{t.conceptPreview}</span>
+    )}
+  </div>
+
+  <div class="flex flex-1 flex-col p-6 sm:p-8">
+    <p class="text-xs font-medium uppercase tracking-widest text-amber-300">{t.workProject}</p>
+    <h3 id={titleId} class="mt-3 text-2xl font-semibold tracking-tight text-zinc-100">
+      {project.title[lang]}
+    </h3>
+    <p class="mt-4 text-sm leading-relaxed text-zinc-400">{project.description[lang]}</p>
+
+    <dl class="mt-6 text-sm">
+      <dt class="text-zinc-500">{t.projectRole}</dt>
+      <dd class="mt-1 text-zinc-200">Full Stack · UI/UX</dd>
+    </dl>
+
+    <ul aria-label={t.projectTechnologies} class="mt-5 flex flex-wrap gap-2">
+      {project.technologies.map((technology) => (
+        <li class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
+          {technology}
+        </li>
+      ))}
+    </ul>
+
+    <details class="mt-7 border-t border-white/10 pt-5">
+      <summary class="w-fit cursor-pointer py-1 text-sm font-medium text-zinc-200 transition-colors hover:text-amber-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400">
+        {t.projectContribution}
+      </summary>
+      <ul class="mt-4 space-y-2 pl-4 text-sm leading-relaxed text-zinc-400 marker:text-amber-400/60">
+        {project.responsibilities[lang].map((responsibility) => (
+          <li class="list-disc">{responsibility}</li>
+        ))}
+      </ul>
+    </details>
+  </div>
+</article>
