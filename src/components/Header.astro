@@ -1,5 +1,7 @@
 ---
 import LanguageSwitcher from "./LanguageSwitcher.astro";
+import SocialIcon from "./SocialIcon.astro";
+import { site } from "../config/site";
 import { ui, type Lang } from "../i18n/ui";
 
 interface Props {
@@ -8,6 +10,10 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = ui[lang];
+const profiles = [
+  { label: "LinkedIn", url: site.linkedin, icon: "linkedin" },
+  { label: "GitHub", url: site.github, icon: "github" },
+] as const;
 ---
 
 <header
@@ -47,6 +53,23 @@ const t = ui[lang];
           <a href="#contacto" class="transition-colors hover:text-amber-400">
             {t.contact}
           </a>
+        </li>
+        <li>
+          <ul aria-label={t.professionalProfiles} class="flex items-center gap-1">
+            {profiles.map((profile) => (
+              <li>
+                <a
+                  href={profile.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${profile.label} (${t.opensNewTab})`}
+                  class="inline-flex size-11 items-center justify-center text-zinc-300 transition-colors hover:text-amber-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400"
+                >
+                  <SocialIcon name={profile.icon} />
+                </a>
+              </li>
+            ))}
+          </ul>
         </li>
         <li>
           <LanguageSwitcher lang={lang} />
