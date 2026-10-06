@@ -1,0 +1,42 @@
+---
+import { ui, type Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const cvUrl = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/cv.pdf`;
+---
+
+<section
+  id="sobre-mi"
+  aria-labelledby="about-title"
+  class="mx-auto max-w-6xl scroll-mt-28 px-6 py-24"
+>
+  <div class="border-t border-white/10 pt-8">
+    <p class="text-xs font-medium uppercase tracking-[0.2em] text-amber-400">
+      {t.aboutEyebrow}
+    </p>
+    <h2 id="about-title" class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+      {t.about}
+    </h2>
+
+    <div class="mt-8 max-w-3xl">
+      <div class="space-y-5 text-base leading-relaxed text-zinc-400">
+        <p>{t.aboutIntro}</p>
+        <p>{t.aboutExperience}</p>
+      </div>
+
+      <a
+        href={cvUrl}
+        download="Liam-Barrientos-CV.pdf"
+        class="mt-8 inline-flex min-h-11 items-center gap-3 rounded-full border border-amber-400/50 px-6 py-3 text-sm font-medium text-amber-300 transition-colors hover:border-amber-400 hover:bg-amber-400/10 motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400"
+      >
+        {t.downloadCv}
+        <span aria-hidden="true">↓</span>
+      </a>
+    </div>
+  </div>
+</section>

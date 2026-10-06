@@ -1,0 +1,60 @@
+---
+import { skillGroups } from "../data/skills";
+import { ui, type Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<section
+  id="habilidades"
+  aria-labelledby="skills-title"
+  class="mx-auto max-w-6xl scroll-mt-28 px-6 py-24"
+>
+  <div class="mb-10 border-t border-white/10 pt-8">
+    <p class="text-xs font-medium uppercase tracking-[0.2em] text-amber-400">
+      {t.skillsEyebrow}
+    </p>
+    <h2 id="skills-title" class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+      {t.skillsTitle}
+    </h2>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-400">
+      {t.skillsIntroduction}
+    </p>
+  </div>
+
+  <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+    {skillGroups.map((group, index) => (
+      <article
+        aria-labelledby={`skill-group-${group.id}`}
+        class:list={[
+          "rounded-2xl border border-white/10 bg-white/[0.025] p-6 transition-colors hover:border-amber-400/25 motion-reduce:transition-none sm:p-7",
+          { "xl:col-span-2": group.id === "ui-ux" || group.id === "personal" },
+        ]}
+      >
+        <div class="mb-5 flex items-center justify-between gap-4">
+          <h3 id={`skill-group-${group.id}`} class="text-base font-semibold text-zinc-100">
+            {group.title[lang]}
+          </h3>
+          <span class="font-mono text-xs text-amber-400/60" aria-hidden="true">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+        </div>
+        <ul class="flex flex-wrap gap-2">
+          {group.items.map((item) => (
+            <li class="max-w-full rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm leading-relaxed text-zinc-300">
+              {item.name[lang]}
+              {item.note && (
+                <span class="text-zinc-400"> · {item.note[lang]}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </article>
+    ))}
+  </div>
+</section>
