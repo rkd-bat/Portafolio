@@ -48,7 +48,6 @@ export const skillGroups: SkillGroup[] = [
     title: { es: "UI/UX", en: "UI/UX" },
     items: [
       skill("Figma"),
-      skill("Framer"),
       { name: { es: "Herramientas de Adobe", en: "Adobe tools" } },
       { name: { es: "Diseño responsive", en: "Responsive web design" } },
       skill("Wireframing"),

@@ -69,13 +69,6 @@ const previewSrc = project.preview
     {project.context && <p class="mt-2 text-xs text-zinc-500">{project.context[lang]}</p>}
     <p class="mt-4 text-sm leading-relaxed text-zinc-400">{project.description[lang]}</p>
 
-    {!compact && (
-      <dl class="mt-6 text-sm">
-        <dt class="text-zinc-500">{t.projectRole}</dt>
-        <dd class="mt-1 text-zinc-200">Full Stack · UI/UX</dd>
-      </dl>
-    )}
-
     {project.technologies.length > 0 ? (
       <ul aria-label={t.projectTechnologies} class="mt-5 flex flex-wrap gap-2">
         {project.technologies.map((technology) => (
@@ -86,19 +79,6 @@ const previewSrc = project.preview
       </ul>
     ) : (
       <p class="mt-5 text-xs text-zinc-500">{t.projectDetailsPending}</p>
-    )}
-
-    {!compact && project.responsibilities[lang].length > 0 && (
-      <details class="mt-7 border-t border-white/10 pt-5">
-        <summary class="w-fit cursor-pointer py-1 text-sm font-medium text-zinc-200 transition-colors hover:text-amber-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400">
-          {t.projectContribution}
-        </summary>
-        <ul class="mt-4 space-y-2 pl-4 text-sm leading-relaxed text-zinc-400 marker:text-amber-400/60">
-          {project.responsibilities[lang].map((responsibility) => (
-            <li class="list-disc">{responsibility}</li>
-          ))}
-        </ul>
-      </details>
     )}
 
     {(project.repositoryUrl || project.demoUrl) && (
