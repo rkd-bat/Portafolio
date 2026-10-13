@@ -14,7 +14,6 @@ interface ProjectDetails {
   context?: LocalizedText;
   demoUrl?: string;
   preview?: {
-    // Ruta relativa a public/, por ejemplo: "projects/inventory.webp".
     src: string;
     alt: LocalizedText;
   };
@@ -47,6 +46,13 @@ export const projects: Project[] = [
     featured: true,
     code: "INV",
     title: { es: "Sistema de inventario", en: "Inventory system" },
+    preview: {
+      src: "projects/inventory.png",
+      alt: {
+        es: "Captura de la interfaz del sistema de inventario",
+        en: "Screenshot of the inventory system interface",
+      },
+    },
     description: {
       es: "Sistema de inventario desarrollado para la empresa, desde la investigación y el diseño de interfaces hasta la implementación Full Stack.",
       en: "An inventory system developed for the company, from research and interface design through full-stack implementation.",
@@ -55,17 +61,27 @@ export const projects: Project[] = [
     technologies: ["React.js", "C# / .NET", "SQL Server", "Figma"],
   },
   {
-    id: "erp",
+    id: "central-portal",
     category: "professional",
     featured: true,
-    code: "ERP",
-    title: { es: "ERP empresarial", en: "Enterprise ERP" },
-    description: {
-      es: "Sistema de gestión empresarial diseñado y desarrollado de extremo a extremo, desde el levantamiento de requerimientos hasta la implementación de interfaces, bases de datos y backend.",
-      en: "A business management system designed and developed end to end, from requirements gathering through interface, database, and backend implementation.",
+    code: "SSO",
+    title: { es: "Portal central SSO", en: "Central SSO portal" },
+    preview: {
+      src: "projects/portal.png",
+      alt: {
+        es: "Captura de la interfaz del portal central SSO",
+        en: "Screenshot of the central SSO portal interface",
+      },
     },
-    responsibilities,
-    technologies: ["React.js", "C# / .NET", "SQL Server", "Figma"],
+    description: {
+      es: "Portal con inicio de sesión único (SSO) para acceder de forma segura a Administración, Inventario, Ventas y Control de acceso. Centraliza las aplicaciones internas y simplifica la navegación entre herramientas empresariales.",
+      en: "A Single Sign-On (SSO) portal providing secure access to Administration, Inventory, Sales, and Access Control. It centralizes internal applications and simplifies navigation across enterprise tools.",
+    },
+    responsibilities: {
+      es: ["Desarrollo del portal central para unificar el acceso a aplicaciones internas."],
+      en: ["Development of the central portal to unify access to internal applications."],
+    },
+    technologies: [],
   },
   {
     id: "portfolio",
@@ -86,13 +102,19 @@ export const projects: Project[] = [
   {
     id: "replenishment-kanban",
     category: "professional",
-    provisional: true,
     code: "KAN",
-    context: { es: "Módulo de resurtido", en: "Replenishment module" },
+    context: { es: "Resurtido y monitoreo de existencias", en: "Inventory replenishment & stock monitoring" },
     title: { es: "Kanban de resurtido", en: "Replenishment Kanban" },
+    preview: {
+      src: "projects/kanban.png",
+      alt: {
+        es: "Captura de la interfaz del Kanban de resurtido",
+        en: "Screenshot of the replenishment Kanban interface",
+      },
+    },
     description: {
-      es: "Tablero para organizar y dar seguimiento al proceso de resurtido, con una vista clara del estado de las solicitudes y las tareas pendientes.",
-      en: "A board for organizing and tracking replenishment, with a clear view of request status and pending tasks.",
+      es: "Módulo para monitorear existencias por sucursal y detectar necesidades de resurtido. Incluye clasificación por stock, promedios de consumo y herramientas de filtrado, actualización y exportación para planificar el inventario.",
+      en: "A module for monitoring stock by branch and identifying replenishment needs. Includes stock-level classification, consumption averages, and filtering, update, and export tools for inventory planning.",
     },
     responsibilities: { es: [], en: [] },
     technologies: [],
@@ -100,29 +122,55 @@ export const projects: Project[] = [
   {
     id: "shipping",
     category: "professional",
-    provisional: true,
     code: "ENV",
-    context: { es: "Módulo de embarques", en: "Shipping module" },
-    title: { es: "Embarques", en: "Shipping" },
-    description: {
-      es: "Herramienta para organizar embarques y consultar su seguimiento, reuniendo la información operativa en una interfaz sencilla.",
-      en: "A tool for organizing shipments and tracking their progress, bringing operational information together in a simple interface.",
+    context: { es: "Módulo del ERP", en: "ERP module" },
+    title: { es: "Embarques e historial", en: "Shipments & history" },
+    preview: {
+      src: "projects/shipments.png",
+      alt: {
+        es: "Captura de la interfaz del módulo de embarques",
+        en: "Screenshot of the shipping module interface",
+      },
     },
-    responsibilities: { es: [], en: [] },
+    description: {
+      es: "Módulo del ERP para gestionar órdenes de venta y procesar embarques, con control de cantidades, almacenes y documentación. Incluye un historial con filtros, exportación a Excel y reimpresión en PDF o ticket térmico.",
+      en: "An ERP module for managing sales orders and processing shipments, with quantity, warehouse, and documentation controls. Includes a searchable history with filters, Excel export, and PDF or thermal ticket reprinting.",
+    },
+    responsibilities: {
+      es: ["Desarrollo de la pantalla de historial de embarques, con consulta de envíos completados y opciones de reimpresión."],
+      en: ["Development of the shipment history screen, including completed-shipment lookup and reprinting options."],
+    },
     technologies: [],
   },
   {
     id: "clients",
     category: "professional",
-    provisional: true,
     code: "CLI",
     context: { es: "Módulo de clientes", en: "Client module" },
     title: { es: "Gestión de clientes", en: "Client management" },
-    description: {
-      es: "Módulo para centralizar el registro, la consulta y la actualización de clientes, facilitando el acceso a su información desde un solo lugar.",
-      en: "A module for centralizing client registration, lookup, and updates, making their information accessible in one place.",
+    preview: {
+      src: "projects/customers.png",
+      alt: {
+        es: "Captura de la interfaz del módulo de gestión de clientes",
+        en: "Screenshot of the client management module interface",
+      },
     },
-    responsibilities: { es: [], en: [] },
+    description: {
+      es: "Módulo que centraliza la información de clientes y agiliza las operaciones internas. Participé en requerimientos, UI/UX, frontend e integración, con interfaces alineadas al sistema de diseño de la empresa.",
+      en: "A module that centralizes customer information and streamlines internal operations. I contributed to requirements, UI/UX, frontend, and integration, with interfaces aligned with the company's Design System.",
+    },
+    responsibilities: {
+      es: [
+        "Análisis de requerimientos y diseño UI/UX.",
+        "Implementación frontend e integración con el sistema.",
+        "Interfaces alineadas con el sistema de diseño de la empresa.",
+      ],
+      en: [
+        "Requirements analysis and UI/UX design.",
+        "Frontend implementation and system integration.",
+        "Interfaces aligned with the company's Design System.",
+      ],
+    },
     technologies: [],
   },
   {
