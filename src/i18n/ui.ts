@@ -55,7 +55,7 @@ export const ui = {
         sendEmail: "Enviar correo",
         emailLabel: "Correo",
         locationLabel: "Ubicación",
-        contactLocation: "Monterrey, México",
+        contactLocation: "Monterrey, México.",
         collaborationLabel: "Forma de colaboración",
         remotePreference: "Me interesa colaborar en proyectos de forma remota.",
         professionalProfiles: "Perfiles profesionales",
