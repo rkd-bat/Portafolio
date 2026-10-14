@@ -36,7 +36,7 @@ export const skillGroups: SkillGroup[] = [
   {
     id: "backend",
     title: { es: "Backend", en: "Backend" },
-    items: [skill("C#"), skill(".NET Core")],
+    items: [skill("C#"), skill("ASP.NET Core")],
   },
   {
     id: "databases",
